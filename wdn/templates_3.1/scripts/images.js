@@ -14,10 +14,7 @@ WDN.images = (function() {
          * @memberOf WDN.images
          */
         initialize: function() {
-            // If called from WDN.images.onResize this has already been done.
-            if (WDN.images.imageList.length === 0) {
-                WDN.images.setImageList();
-            }
+            WDN.images.setImageList();
 
             if (WDN.getCurrentWidthBreakpoint() > 320) {
                 for (var i = 0; i < WDN.images.imageList.length; i++) {
@@ -43,7 +40,7 @@ WDN.images = (function() {
                         elsLen = els.length,
                         pattern = new RegExp("(^|\\s)"+searchClass+"(\\s|$)"), i, j;
                     for (var i = 0, j = 0; i < elsLen; i++) {
-                      if ( pattern.test(els[i].className) ) {
+                      if (pattern.test(els[i].className)) {
                           classElements[j] = els[i];
                           j++;
                       }
@@ -90,8 +87,12 @@ WDN.images = (function() {
             // function handleImageError() {
             //     WDN.log(url + ' failed to load');
             // }
-            replacement.addEventListener('load', replace, false);
             // replacement.addEventListener('error', handleImageError);
+            if (replacement.addEventListener) {
+                replacement.addEventListener('load', replace, false);
+            } else { // IE8
+                replacement.attachEvent('onload', replace);
+            }
             replacement.src = url;
         },
 
