@@ -78,20 +78,23 @@
     }
 
     #navigation.nav-scrolling > ul {
-        padding-left: 35px;
+        padding-left: 67px;
 
         >li:first-child {
             position: relative;
 
-            &:before {
+            &::before {
                 content: '';
-                background: url(../images/n_outline.png) no-repeat;
-                .background-size(contain);
-                width: 30px;
-                height: 30px;
+                background-image: url(../images/n_outline2.svg);
+                background-position: right -15px;
+                background-repeat: no-repeat;
+                background-color: @brand;
+                .background-size(100px);
+                border-radius: 0 0 4px 4px;
+                width: 105px;
+                height: 33px;
                 position: absolute;
-                left: -33px;
-                top: 2px;
+                left: -107px;
             }
         }
     }
