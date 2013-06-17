@@ -6,7 +6,7 @@
     }
 }
 
-#navigation {
+#navigation ul {
     a {
         &:hover {
             background-color: rgba(255, 255, 255, 0.1);
@@ -75,5 +75,30 @@
         .nav_expanded & {
             
         }
+    }
+
+    #navigation.nav-scrolling > ul {
+        padding-left: 35px;
+
+        >li:first-child {
+            position: relative;
+
+            &:before {
+                content: '';
+                background: url(../images/n_outline.png) no-repeat;
+                .background-size(contain);
+                width: 30px;
+                height: 30px;
+                position: absolute;
+                left: -33px;
+                top: 2px;
+            }
+        }
+    }
+}
+
+@media @bp-nav-max {
+    #navigation.nav-scrolling > ul {
+        padding-left: 0;
     }
 }
