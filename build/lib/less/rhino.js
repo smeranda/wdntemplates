@@ -5,6 +5,8 @@ function loadStyleSheet(sheet, callback, reload, remaining) {
         sheetName = name.slice(0, endOfPath + 1) + sheet.href,
         contents = sheet.contents || {},
         input = readFile(sheetName);
+
+    input = input.replace(/^\xEF\xBB\xBF/, '');
         
     contents[sheetName] = input;
         
@@ -17,7 +19,7 @@ function loadStyleSheet(sheet, callback, reload, remaining) {
             return error(e, sheetName);
         }
         try {
-            callback(e, root, sheet, { local: false, lastModified: 0, remaining: remaining });
+            callback(e, root, input, sheet, { local: false, lastModified: 0, remaining: remaining }, sheetName);
         } catch(e) {
             error(e, sheetName);
         }
@@ -119,5 +121,5 @@ function error(e, filename) {
         errorline(e, 1);
         errorline(e, 2);
     }
-   print(content);
+    print(content);
 }
